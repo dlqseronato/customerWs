@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://scpe.positivo.edu.br/order-ws" xmlns:tns="http://scpe.positivo.edu.br/order-ws"
+	version="1.0">
+
+	<xs:complexType name="OrderInfo">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="openDate" type="xs:string" />
+			<xs:element name="closeDate" type="xs:string" />
+			<xs:element name="customer" type="tns:CustomerInfo" />
+			<xs:element name="orderItem" type="tns:OrderItemInfo" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CustomerInfo">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="firstName" type="xs:string" />
+			<xs:element name="lastName" type="xs:string" />
+			<xs:element name="cpf" type="xs:string" />
+			<xs:element name="bornDate" type="xs:string" />
+			<xs:element name="email" type="xs:string" />
+			<xs:element name="password" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="OrderItemInfo">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="productId" type="xs:long" />
+			<xs:element name="unityValue" type="xs:double" />
+			<xs:element name="quantity" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="serviceStatus">
+		<xs:sequence>
+			<xs:element name="statusCode" type="xs:string" />
+			<xs:element name="message" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="getOrderByIdRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="xs:long" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getOrderByIdResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="OrderInfo" type="tns:OrderInfo" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getOrderByCpfRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="cpf" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getOrderByCpfResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="OrderInfo" type="tns:OrderInfo" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getAllOrdersRequest">
+		<xs:complexType />
+	</xs:element>
+
+	<xs:element name="getAllOrdersResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="OrderInfo" type="tns:OrderInfo"
+					maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="addOrderRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="openDate" type="xs:date" />
+				<xs:element name="closeDate" type="xs:date" />
+				<xs:element name="customer" type="tns:CustomerInfo" />
+				<xs:element name="orderItem" type="tns:OrderItemInfo" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="addOrderResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="serviceStatus" type="tns:serviceStatus" />
+				<xs:element name="OrderInfo" type="tns:OrderInfo" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="updateOrderRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="OrderInfo" type="tns:OrderInfo" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="updateOrderResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="serviceStatus" type="tns:serviceStatus" />
+				<xs:element name="OrderInfo" type="tns:OrderInfo" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="deleteOrderRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="xs:long" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="deleteOrderResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="serviceStatus" type="tns:serviceStatus" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
