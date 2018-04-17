@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://scpe.positivo.edu.br/customer-ws"
+xmlns:tns="http://scpe.positivo.edu.br/customer-ws"
+ version="1.0">
+
+  <xs:complexType name="CustomerInfo">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="firstName" type="xs:string"/>
+	  <xs:element name="lastName" type="xs:string"/>
+	  <xs:element name="cpf" type="xs:string"/>
+      <xs:element name="bornDate" type="xs:string"/>
+      <xs:element name="email" type="xs:string"/>
+      <xs:element name="password" type="xs:string"/>
+
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="serviceStatus">
+      <xs:sequence>
+          <xs:element name="statusCode" type="xs:string"/>
+          <xs:element name="message" type="xs:string"/>
+      </xs:sequence>
+  </xs:complexType>     
+  
+  <xs:element name="getCustomerByIdRequest">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+
+   <xs:element name="getCustomerByIdResponse">
+   	<xs:complexType>
+        <xs:sequence>
+            <xs:element name="CustomerInfo" type="tns:CustomerInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+  
+  <xs:element name="getCustomerByCpfRequest">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="cpf" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+
+   <xs:element name="getCustomerByCpfResponse">
+   	<xs:complexType>
+        <xs:sequence>
+            <xs:element name="CustomerInfo" type="tns:CustomerInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+   </xs:element>   
+   
+   <xs:element name="getAllCustomersRequest">
+    <xs:complexType/>
+   </xs:element>
+
+   <xs:element name="getAllCustomersResponse">
+   	<xs:complexType>
+        <xs:sequence>
+            <xs:element name="CustomerInfo" type="tns:CustomerInfo" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+   
+   <xs:element name="addCustomerRequest">
+        <xs:complexType>
+            <xs:sequence>
+			  <xs:element name="firstName" type="xs:string"/>
+			  <xs:element name="lastName" type="xs:string"/>
+			  <xs:element name="cpf" type="xs:string"/>
+			  <xs:element name="bornDate" type="xs:string"/>
+			  <xs:element name="email" type="xs:string"/>
+			  <xs:element name="password" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="addCustomerResponse">
+        <xs:complexType>
+            <xs:sequence>      
+            	<xs:element name="serviceStatus" type="tns:serviceStatus"/>
+                <xs:element name="CustomerInfo" type="tns:CustomerInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateCustomerRequest">
+        <xs:complexType>
+            <xs:sequence>
+               <xs:element name="CustomerInfo" type="tns:CustomerInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateCustomerResponse">
+        <xs:complexType>
+            <xs:sequence>
+            	<xs:element name="serviceStatus" type="tns:serviceStatus"/>
+                <xs:element name="CustomerInfo" type="tns:CustomerInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteCustomerRequest">
+        <xs:complexType>
+            <xs:sequence>
+               <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteCustomerResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>                   
+</xs:schema>
